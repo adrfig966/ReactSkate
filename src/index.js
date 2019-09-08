@@ -13,7 +13,7 @@ class Gameboard extends React.Component {
       playercount: 2,
       players: [],
       turn: 0,
-      playerdisplay: 0,
+      playerdisplay: 0, //Which player we are displaying input for
       gamestate: "enterplayers"
     };
     //Event Handlers
@@ -31,16 +31,20 @@ class Gameboard extends React.Component {
     }
   }
   nameSubmit() {
-    console.log(this.state.playerdisplay + " " + this.state.playercount);
+    //Don't insert blank player after current player being processed if the current player is the last
     var newplayers =
       this.state.playerdisplay < this.state.playercount - 1
         ? [...this.state.players, { name: "", letters: "" }]
         : [...this.state.players];
 
-    this.setState({
-      playerdisplay: this.state.playerdisplay + 1,
-      players: newplayers
-    });
+    if (this.state.playerdisplay + 1 == this.state.playercount) {
+      this.setState({ gamestate: "game", players: newplayers });
+    } else {
+      this.setState({
+        playerdisplay: this.state.playerdisplay + 1,
+        players: newplayers
+      });
+    }
   }
   inputToState(e) {
     var statetarget = e.target.getAttribute("statename");
@@ -73,27 +77,23 @@ class Gameboard extends React.Component {
         );
         break;
       case "enternames":
-        if (this.state.playerdisplay >= this.state.playercount) {
-          ui = (
-            <GameUI
-              onWin={this.gameReset}
-              players={this.state.players}
-              turn={this.state.turn}
-            />
-          );
-        } else {
-          ui = (
-            <Nameform
-              textFieldValue={this.state.players[this.state.playerdisplay].name}
-              playerDisplay={this.state.playerdisplay}
-              handleClick={this.nameSubmit}
-              handleTextInput={this.nameInput}
-            />
-          );
-        }
+        ui = (
+          <Nameform
+            textFieldValue={this.state.players[this.state.playerdisplay].name}
+            playerDisplay={this.state.playerdisplay}
+            handleClick={this.nameSubmit}
+            handleTextInput={this.nameInput}
+          />
+        );
         break;
       case "game":
-        ui = <GameUI />;
+        ui = (
+          <GameUI
+            onWin={this.gameReset}
+            players={this.state.players}
+            turn={this.state.turn}
+          />
+        );
         break;
 
       default:

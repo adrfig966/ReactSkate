@@ -72,7 +72,7 @@ class GameUI extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state);
+    //Removes player from game if they have SKATE
     var shiftpoint;
     var updatedplayers = this.state.players.filter((player, i) => {
       if (player.letters == "SKATE") {
@@ -81,12 +81,12 @@ class GameUI extends React.Component {
       }
       return true;
     });
-    //Reset
+    //Reset game
     if (updatedplayers.length == 1) {
       this.props.onWin();
       return;
     }
-
+    //Handles scenario where player is removed from the game
     if (this.state.players.length != updatedplayers.length) {
       var nextdisplay = shiftpoint;
       var nextgamestate = "defensive";
@@ -99,7 +99,6 @@ class GameUI extends React.Component {
       } else if (shiftpoint + 1 == this.state.turn) {
         nextgamestate = "offensive";
       }
-      console.log("Before Update");
       this.setState({
         players: updatedplayers,
         gamestate: nextgamestate,
@@ -108,11 +107,6 @@ class GameUI extends React.Component {
           this.state.turn > shiftpoint ? this.state.turn - 1 : this.state.turn
       });
     }
-    //Check for win
-  }
-  componentDidMount() {
-    //this.props.onWin();
-    console.log(this.state);
   }
   render() {
     var gameinfo =
