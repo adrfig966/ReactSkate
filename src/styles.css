@@ -1,18 +1,27 @@
+html, body, #root {
+  height: 100%
+}
 body {
   background-color: #8f8389;
   font-size: 30px;
+  height: 100%;
+  width: 100%;
+  margin: 0 0;
+  padding: 0 0;
 }
 .gameboard {
   width: 80%;
   position: absolute;
+  left: 50%;
   top: 50%;
-  left: 10%;
   background-color: #c2eaba;
   border-radius: 10px;
   padding: 10px;
   text-align: center;
   font-family: "Quicksand";
-  transform: translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  max-height: calc(100% - 20px);
+  overflow-y: scroll;
 }
 .score-row {
   width: 100%;

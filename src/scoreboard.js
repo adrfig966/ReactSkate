@@ -10,7 +10,7 @@ class Scoreboard extends React.Component {
         {this.props.players.map(player => {
           return (
             <div className="score-row" key={"player-" + player.name}>
-              {player.name}
+              {player.name}<br/>
               {player.letters.split().map(letter => {
                 return (
                   <span
