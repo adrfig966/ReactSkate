@@ -6,7 +6,7 @@ class PlayerCountForm extends React.Component {
   }
   render() {
     return (
-      <div>
+      <form onSubmit={this.props.handleClick}>
         <label htmlFor="count">Player count (2-10)</label>
         <input
           className="textfield"
@@ -20,12 +20,11 @@ class PlayerCountForm extends React.Component {
           autoFocus
         />
         <input
-          onClick={this.props.handleClick}
           className="button"
-          type="button"
+          type="submit"
           value="Submit"
         />
-      </div>
+      </form>
     );
   }
 }

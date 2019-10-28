@@ -9,6 +9,11 @@ body {
   margin: 0 0;
   padding: 0 0;
 }
+hr{
+  border: none;
+  border-bottom: 2px solid #8f8389;
+  width: 90%;
+}
 .gameboard {
   width: 80%;
   position: absolute;
@@ -21,7 +26,7 @@ body {
   font-family: "Quicksand";
   transform: translateX(-50%) translateY(-50%);
   max-height: calc(100% - 20px);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .score-row {
   width: 100%;
