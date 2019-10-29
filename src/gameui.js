@@ -9,7 +9,7 @@ class GameUI extends React.Component {
       gamehistory: [],
       gamestate: "offensive",
       turn: this.props.turn,
-      playerdisplay: 1
+      playerdisplay: this.props.display
     };
 
     this.landSubmit = this.landSubmit.bind(this);
@@ -133,7 +133,7 @@ class GameUI extends React.Component {
 
     return (
       <div>
-        <Scoreboard players={this.state.players} />
+        <Scoreboard players={this.state.players} turn={this.state.turn} display={this.state.playerdisplay} />
         <input
           type="button"
           onClick={this.landSubmit}

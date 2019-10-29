@@ -53,8 +53,13 @@ class Gameboard extends React.Component {
       });
     }
   }
-  turnSubmit(e) {
-    this.setState({turn: parseInt(e.target.getAttribute("turnindex")), gamestate: "game", originalplayers: this.state.players});
+  turnSubmit(index) {
+    this.setState({
+      turn: index,
+      display: index,
+      gamestate: "game",
+      originalplayers: this.state.players
+    });
   }
   inputToState(e) {
     var statetarget = e.target.getAttribute("statename");
@@ -65,10 +70,10 @@ class Gameboard extends React.Component {
     newplayers[this.state.playerdisplay].name = e.target.value;
     this.setState({ players: newplayers });
   }
-  editSubmit(newplayers){
+  editSubmit(newplayers) {
     this.setState({ gamestate: "turnselect", players: newplayers });
   }
-  newSubmit(){
+  newSubmit() {
     this.setState({
       playercount: 2,
       players: [],
@@ -106,7 +111,12 @@ class Gameboard extends React.Component {
         );
         break;
       case "turnselect":
-        ui = <Turnselect handleSubmit={this.turnSubmit} players={this.state.players}/>;
+        ui = (
+          <Turnselect
+            handleSubmit={this.turnSubmit}
+            players={this.state.players}
+          />
+        );
         break;
       case "game":
         ui = (
@@ -114,11 +124,18 @@ class Gameboard extends React.Component {
             onWin={this.gameReset}
             players={this.state.players}
             turn={this.state.turn}
+            display={this.state.display}
           />
         );
         break;
       case "playeredit":
-        ui = <Playeredit handleEdit={this.editSubmit} handleNew={this.newSubmit} players={this.state.originalplayers}/>
+        ui = (
+          <Playeredit
+            handleEdit={this.editSubmit}
+            handleNew={this.newSubmit}
+            players={this.state.originalplayers}
+          />
+        );
         break;
       default:
     }

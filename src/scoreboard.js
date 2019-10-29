@@ -7,9 +7,11 @@ class Scoreboard extends React.Component {
   render() {
     return (
       <div>
-        {this.props.players.map(player => {
+        {this.props.players.map((player, index) => {
+          var activeclass = "";
+          if(index == this.props.turn){activeclass = "offensive"}
           return (
-            <div className="score-row" key={"player-" + player.name}>
+            <div className={`score-row ${activeclass}`} key={"player-" + player.name}>
               {player.name}<br/>
               {player.letters.split().map(letter => {
                 return (

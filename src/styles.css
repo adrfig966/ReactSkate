@@ -34,6 +34,12 @@ hr{
   color: #c5f4e0;
   padding: 10px 0;
 }
+.defensive{
+  background-color: pink;
+}
+.offensive{
+  background-color: #008040
+}
 .position-icon {
   background-color: #e6efe9;
   color: black;
